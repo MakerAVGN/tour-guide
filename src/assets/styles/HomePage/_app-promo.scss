@@ -1,0 +1,85 @@
+@use '../variables' as var;
+
+.promo-section {
+  padding: 7rem 0 8rem 0;
+  min-height: 420px;
+  color: #fff;
+  overflow: hidden;
+
+  &__container {
+    max-width: 1170px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 48px;
+
+    @media (max-width: 900px) {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  &__mockup {
+    flex: 1 1 400px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    min-width: 260px;
+
+    img {
+      max-width: 60rem;
+      width: 100%;
+      animation: floatY 3.5s ease-in-out infinite;
+    }
+  }
+
+  @keyframes floatY {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-18px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  &__content {
+    flex: 1 1 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 260px;
+  }
+
+  &__title {
+    font-family: 'Nico Moji';
+    font-weight: 400;
+    font-size: 2.8rem;
+    color: var.$main-header-color;
+    line-height: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  &__desc {
+    font-size: 1.6rem;
+    margin-bottom: 32px;
+    font-weight: 600;
+    color: #778088;
+    max-width: 420px;
+  }
+
+  &__btn {
+    font-size: 1.1rem;
+    padding: 14px 38px;
+    border-radius: 32px;
+    font-weight: 700;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border: none;
+    cursor: pointer;
+    transition:
+      background 0.2s,
+      color 0.2s;
+  }
+}

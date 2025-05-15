@@ -1,0 +1,20 @@
+@use 'header';
+@use 'normalize';
+@use 'home';
+@use 'footer';
+@use './ProfilePage/profile';
+@use './NeiroPage/neiro';
+@use 'poopup';
+@forward 'variables';
+
+@import url('https://fonts.googleapis.com/css2?family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&family=Volkhov:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+@import url(https://fonts.googleapis.com/earlyaccess/nicomoji.css);
+
+body {
+  font-family: 'Mulish', sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #fff;
+}

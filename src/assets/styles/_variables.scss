@@ -1,0 +1,15 @@
+$main-dark: #1c2b38;
+$main-header-color: #495560;
+$main-white: #fff;
+
+@mixin flexcenter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flexbetween {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
