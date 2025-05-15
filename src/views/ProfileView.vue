@@ -113,10 +113,27 @@
                 </div>
                 <div v-if="trip.notes" class="trip-notes"><b>Заметки:</b> {{ trip.notes }}</div>
               </div>
-
-              <button class="build-route-btn" @click="openYandexRoute(trip)">
-                Построить маршрут
-              </button>
+              <div class="trip-buttons">
+                <button class="build-route-btn" @click="openYandexRoute(trip)">
+                  Построить маршрут
+                </button>
+                <button class="delete-trip-btn" @click="handleDeleteTrip(trip)">
+                  <span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="200"
+                      height="200"
+                      viewBox="0 0 20 20"
+                      fill="#000000"
+                    >
+                      <path
+                        fill="#000000"
+                        d="m6 2l2-2h4l2 2h4v2H2V2h4zM3 6h14l-1 14H4L3 6zm5 2v10h1V8H8zm3 0v10h1V8h-1z"
+                      ></path>
+                    </svg>
+                  </span>
+                </button>
+              </div>
             </div>
           </div>
           <div v-else class="no-trips">У вас пока нет сохранённых туров</div>
@@ -164,44 +181,19 @@ const {
   onFileChange,
 } = useProfile()
 
-const { openYandexRoute } = useTrips() // , deleteTrip
+const { openYandexRoute, deleteTrip } = useTrips()
+
+const handleDeleteTrip = async (trip) => {
+  console.log('Данные тура:', trip)
+  if (!trip.number) {
+    console.error('У тура отсутствует номер')
+    return
+  }
+  const result = await deleteTrip(trip.number)
+  if (!result.success) {
+    console.error('Ошибка при удалении тура:', result.message)
+  }
+}
 
 onMounted(loadProfile)
 </script>
-
-<style scoped>
-.profile {
-  min-height: 100%;
-  background: #fff;
-  margin-top: 9rem;
-}
-
-.profile.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  font-size: 1.6rem;
-  color: #666;
-}
-
-.profile-wrapper {
-  background: #f4f4f5;
-  padding-top: 4rem;
-  padding-bottom: 6rem;
-  min-height: calc(100vh - 200px);
-}
-
-.avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  object-fit: cover;
-  cursor: pointer;
-  transition: opacity 0.2s;
-}
-
-.avatar:hover {
-  opacity: 0.8;
-}
-</style>

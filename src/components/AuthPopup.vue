@@ -101,6 +101,8 @@ const confirmPassword = ref('')
 const passwordError = ref('')
 const authError = ref('')
 const isLoading = ref(false)
+import { useRouter } from 'vue-router'
+const router = useRouter()
 
 const onLogin = async () => {
   try {
@@ -116,6 +118,7 @@ const onLogin = async () => {
     authError.value = 'Неверный логин или пароль'
   } finally {
     isLoading.value = false
+    router.push('/profile')
   }
 }
 

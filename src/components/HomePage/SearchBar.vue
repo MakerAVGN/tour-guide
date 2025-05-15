@@ -29,6 +29,11 @@
 
 <script setup>
 const emit = defineEmits(['open-auth', 'close-auth'])
+import { useUserStore } from '../../stores/user'
+import { useRouter } from 'vue-router'
+
+const userStore = useUserStore()
+const router = useRouter()
 
 defineProps({
   showAuth: {
@@ -38,6 +43,10 @@ defineProps({
 })
 
 function handleSearch() {
-  emit('open-auth')
+  if (userStore.isAuth) {
+    router.push('/chat')
+  } else {
+    emit('open-auth')
+  }
 }
 </script>

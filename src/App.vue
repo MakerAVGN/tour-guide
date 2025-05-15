@@ -27,18 +27,6 @@ function closeAuth() {
 </template>
 
 <style>
-.app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.main-content {
-  flex: 1 0 auto;
-  min-height: calc(100vh - 200px); /* Высота хедера + футера */
-  padding-bottom: 2rem;
-}
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.3s ease;

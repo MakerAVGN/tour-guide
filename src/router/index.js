@@ -8,23 +8,20 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
+      alias: '/tour-guide',
       component: HomeView,
     },
     {
       path: '/chat',
       name: 'chat',
       component: () => import('../views/NeiroView.vue'),
+      meta: { requiresAuth: true },
     },
     {
       path: '/profile',
       name: 'profile',
       component: () => import('../views/ProfileView.vue'),
       meta: { requiresAuth: true },
-    },
-    {
-      path: '/auth',
-      name: 'auth',
-      component: () => import('../views/AuthView.vue'),
     },
   ],
 })

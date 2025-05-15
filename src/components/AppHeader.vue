@@ -2,18 +2,18 @@
   <header :class="[isHome ? 'header-home' : 'header', { scrolled: isScrolled }]">
     <div class="header-container">
       <div class="header-logo">
-        <a href="/"> <h1>tour guide</h1></a>
+        <router-link :to="{ path: '/' }"> <h1>tour guide</h1></router-link>
       </div>
       <nav v-if="windowWidth > 965" class="header-nav" :class="{ 'is-mobile': isMobileMenuOpen }">
-        <a
+        <router-link
           v-for="link in links"
           :key="link.path"
-          :href="link.path"
+          :to="link.path"
           class="header-nav__link"
           @click="closeMobileMenu"
         >
           {{ link.name }}
-        </a>
+        </router-link>
       </nav>
       <template v-else>
         <div class="burger">
@@ -56,15 +56,15 @@
                   &times;
                 </button>
                 <nav>
-                  <a
+                  <router-link
                     v-for="link in links"
                     :key="link.path"
-                    :href="link.path"
+                    :to="link.path"
                     class="mobile-menu__link"
                     @click="closeMobileMenu"
                   >
                     {{ link.name }}
-                  </a>
+                  </router-link>
                 </nav>
               </div>
             </transition>

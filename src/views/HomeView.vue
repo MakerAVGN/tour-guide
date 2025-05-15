@@ -1,6 +1,12 @@
 <script setup>
+import { defineEmits } from 'vue'
 import SearchBar from '../components/HomePage/SearchBar.vue'
 import PopularCities from '../components/HomePage/PopularCities.vue'
+import { useUserStore } from '../stores/user'
+import { useRouter } from 'vue-router'
+
+const userStore = useUserStore()
+const router = useRouter()
 
 defineProps({
   showAuth: {
@@ -9,7 +15,15 @@ defineProps({
   },
 })
 
-defineEmits(['open-auth', 'close-auth'])
+const showAuthBtn = () => {
+  if (userStore.isAuth) {
+    router.push('/chat')
+  } else {
+    emit('open-auth')
+  }
+}
+
+const emit = defineEmits(['open-auth', 'close-auth'])
 </script>
 
 <template>
@@ -151,7 +165,7 @@ defineEmits(['open-auth', 'close-auth'])
           Ваш идеальный маршрут по Крыму — в одном приложении. Персональные рекомендации, мгновенный
           подбор туров и только актуальная информация.
         </p>
-        <button class="search-bar__btn promo-section__btn">
+        <button @click="showAuthBtn" class="search-bar__btn promo-section__btn">
           <span>Найти свой тур</span>
         </button>
       </div>

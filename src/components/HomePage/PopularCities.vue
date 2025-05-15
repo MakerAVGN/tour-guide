@@ -104,27 +104,27 @@ const cities = [
 const features = [
   {
     icon: '🚍', // Можно заменить на SVG
-    text: 'Public Transportations',
+    text: 'Общественный транспорт',
     color: '#b97ffb',
   },
   {
     icon: '🌿',
-    text: 'Nature & Adventure',
+    text: 'Природа',
     color: '#6cc3b5',
   },
   {
     icon: '🚕',
-    text: 'Private Transportations',
+    text: 'Частный транспорт',
     color: '#ffd600',
   },
   {
     icon: '💼',
-    text: 'Business Tours',
+    text: 'Бизнес-туры',
     color: '#ff5b5b',
   },
   {
     icon: '📍',
-    text: 'Local Visit',
+    text: 'Местные достопримечательности',
     color: '#4a90e2',
   },
 ]

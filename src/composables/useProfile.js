@@ -20,7 +20,7 @@ export function useProfile() {
     photo: null,
   })
 
-  const avatarUrl = ref('/img/user-default.jpg')
+  const avatarUrl = ref('/tour-guide/img/user-default.jpg')
   const showAvatarPopup = ref(false)
 
   // Табы
@@ -109,7 +109,7 @@ export function useProfile() {
 
   const loadPhoto = async () => {
     if (!userData.value.photo) {
-      avatarUrl.value = '/img/user-default.jpg'
+      avatarUrl.value = '/tour-guide/img/user-default.jpg'
       return
     }
 
@@ -125,7 +125,7 @@ export function useProfile() {
       avatarUrl.value = URL.createObjectURL(blob)
     } catch (e) {
       console.error('Ошибка загрузки фото:', e)
-      avatarUrl.value = '/img/user-default.jpg'
+      avatarUrl.value = '/tour-guide/img/user-default.jpg'
     }
   }
 

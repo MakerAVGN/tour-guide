@@ -14,7 +14,7 @@ const HEADERS = {
 }
 
 // Максимальный размер данных для отправки (в байтах)
-const MAX_PAYLOAD_SIZE = 1024 * 1024 // 1MB
+const MAX_PAYLOAD_SIZE = 5 * 1024 * 1024 // 5MB
 
 // Базовый метод для запросов
 const fetchWithAuth = async (endpoint, options = {}) => {
@@ -103,10 +103,10 @@ export const profileService = {
     return fetchWithAuth('/profile/photo', { token })
   },
 
-  // async deleteTrip(token, tripIdentifier) {
-  //   return fetchWithAuth(`/profile/trips/${encodeURIComponent(tripIdentifier)}`, {
-  //     method: HTTP_METHODS.DELETE,
-  //     token,
-  //   })
-  // },
+  async deleteTrip(token, tripId) {
+    return fetchWithAuth(`/profile/trips/${tripId}`, {
+      method: HTTP_METHODS.DELETE,
+      token,
+    })
+  },
 }

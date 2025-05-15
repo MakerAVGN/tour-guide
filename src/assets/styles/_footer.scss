@@ -12,6 +12,10 @@
     gap: 40px;
     flex-wrap: wrap;
     padding: 0 0 32px 0;
+    @media (max-width: 1200px) {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
   }
 
   &__logo {
@@ -27,6 +31,9 @@
   &__newsletter-content {
     flex: 1 1 320px;
     min-width: 260px;
+    @media (max-width: 700px) {
+      flex: auto;
+    }
   }
 
   &__newsletter-title {
@@ -120,6 +127,10 @@
       flex-wrap: wrap;
       gap: 18px;
       font-size: 0.98em;
+      @media (max-width: 1200px) {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
     }
   }
 
