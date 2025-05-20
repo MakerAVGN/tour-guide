@@ -98,17 +98,21 @@
       </div>
     </div>
   </template>
+  <NotificationContainer />
 </template>
 
 <script setup>
 import { ref, nextTick, onMounted, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
+import { useNotification } from '../composables/useNotification'
+import NotificationContainer from '../components/NotificationContainer.vue'
 
 const input = ref('')
 const messages = ref([])
 const isLoading = ref(false)
 const chatHistory = ref(null)
 const userStore = useUserStore()
+const { showNotification } = useNotification()
 
 // Загружаем историю чата при инициализации
 onMounted(() => {
@@ -265,7 +269,7 @@ async function addTrip() {
       messages.value[currentMsgIdx].added = true
     }
     closeAddTripModal()
-    alert('Маршрут успешно добавлен в профиль!')
+    showNotification('Маршрут успешно добавлен в профиль!', 'success')
   } catch (e) {
     alert('Ошибка при добавлении маршрута')
     console.error(e)

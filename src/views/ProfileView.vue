@@ -70,23 +70,16 @@
               v-model="userData.gender"
               :disabled="activeTab === 'profile'"
             >
-              <button>
-                <selectedcontent></selectedcontent>
-              </button>
               <option value="">Выберите пол</option>
-              <option value="male">
-                <span class="option-label">Мужчина</span>
-              </option>
-              <option value="female">
-                <span class="option-label">Женщина</span>
-              </option>
+              <option value="male">Мужчина</option>
+              <option value="female">Женщина</option>
             </select>
           </div>
           <div class="form-group">
             <label>Дата рождения:</label>
             <input v-model="userData.birthday" type="date" :disabled="activeTab === 'profile'" />
           </div>
-          <button v-if="activeTab === 'security'" class="save-btn" @click="saveProfile">
+          <button v-if="activeTab === 'security'" class="save-btn" @click="handleSave">
             Сохранить
           </button>
         </div>
@@ -157,12 +150,26 @@
       </div>
     </div>
   </div>
+  <NotificationContainer />
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import { useProfile } from '@/composables/useProfile'
 import { useTrips } from '@/composables/useTrips'
+import { useNotification } from '@/composables/useNotification'
+import NotificationContainer from '../components/NotificationContainer.vue'
+
+defineProps({
+  showAuth: {
+    type: Boolean,
+    required: true,
+  },
+})
+
+defineEmits(['openAuth', 'closeAuth'])
+
+const { showNotification } = useNotification()
 
 const {
   isLoading,
@@ -192,6 +199,24 @@ const handleDeleteTrip = async (trip) => {
   const result = await deleteTrip(trip.number)
   if (!result.success) {
     console.error('Ошибка при удалении тура:', result.message)
+  }
+}
+
+async function handleSave() {
+  console.log('Начало сохранения профиля')
+  try {
+    const result = await saveProfile()
+    console.log('Результат сохранения:', result)
+    if (result.success) {
+      console.log('Показываю уведомление об успехе')
+      showNotification('Профиль успешно обновлен!', 'success')
+    } else {
+      console.log('Показываю уведомление об ошибке')
+      showNotification('Ошибка при обновлении профиля', 'error')
+    }
+  } catch (error) {
+    console.error('Ошибка при сохранении:', error)
+    showNotification('Произошла ошибка при сохранении профиля', 'error')
   }
 }
 

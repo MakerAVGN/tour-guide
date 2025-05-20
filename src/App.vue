@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import AppHeader from './components/AppHeader.vue'
 import AuthPopup from './components/AuthPopup.vue'
 import AppFooter from './components/AppFooter.vue'
+
 const showAuth = ref(false)
 
 function openAuth() {
@@ -20,6 +21,7 @@ function closeAuth() {
       <RouterView :showAuth="showAuth" @open-auth="openAuth" @close-auth="closeAuth" />
     </main>
     <AppFooter v-cloak />
+
     <transition name="fade">
       <AuthPopup :showAuth="showAuth" v-if="showAuth" @close="closeAuth" />
     </transition>

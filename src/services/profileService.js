@@ -58,6 +58,7 @@ export const profileService = {
 
   // Обновление профиля
   async updateProfile(token, profileData) {
+    console.log('profileService: Начало обновления профиля')
     // Очищаем данные от лишних полей перед отправкой
     const cleanData = {
       username: profileData.username,
@@ -68,8 +69,9 @@ export const profileService = {
       gender: profileData.gender,
       birthday: profileData.birthday,
     }
+    console.log('profileService: Подготовленные данные:', cleanData)
 
-    return fetchWithAuth('/profile', {
+    const result = await fetchWithAuth('/profile', {
       method: HTTP_METHODS.PUT,
       headers: {
         'Content-Type': HEADERS.JSON,
@@ -77,6 +79,8 @@ export const profileService = {
       body: JSON.stringify(cleanData),
       token,
     })
+    console.log('profileService: Получен ответ от сервера:', result)
+    return result
   },
 
   // Загрузка фото

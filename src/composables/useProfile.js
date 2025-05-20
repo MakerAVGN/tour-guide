@@ -57,16 +57,17 @@ export function useProfile() {
   }
 
   const saveProfile = async () => {
+    console.log('useProfile: Начало сохранения профиля')
     try {
+      console.log('useProfile: Отправляю данные на сервер:', userData.value)
       const updated = await profileService.updateProfile(userStore.token, userData.value)
+      console.log('useProfile: Получен ответ от сервера:', updated)
       userStore.user = updated
-      return { success: true, message: 'Профиль успешно сохранён!' }
-    } catch (e) {
-      console.error('Ошибка при сохранении профиля:', e)
-      return {
-        success: false,
-        message: e.message || 'Ошибка при сохранении профиля',
-      }
+      console.log('useProfile: Профиль успешно обновлен')
+      return { success: true }
+    } catch (error) {
+      console.error('useProfile: Ошибка при сохранении профиля:', error)
+      return { success: false, error }
     }
   }
 

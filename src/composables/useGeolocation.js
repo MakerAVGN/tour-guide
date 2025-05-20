@@ -1,24 +1,21 @@
 // src/composables/useGeolocation.js
+
+import { useNotification } from './useNotification'
+
 export function useGeolocation() {
   const defaultCoords = [44.943376, 34.098043] // Симферополь
+  const { showNotification } = useNotification()
 
-  const getUserCoords = () => {
+  const getUserCoords = (options) => {
     return new Promise((resolve, reject) => {
       if (!navigator.geolocation) {
+        showNotification('Геолокация не поддерживается браузером', 'warning')
         reject(new Error('Геолокация не поддерживается браузером'))
         return
       }
 
-      const options = {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      }
-
       navigator.geolocation.getCurrentPosition(
-        (position) => {
-          resolve([position.coords.latitude, position.coords.longitude])
-        },
+        resolve,
         (error) => {
           let errorMessage
           switch (error.code) {
@@ -34,6 +31,7 @@ export function useGeolocation() {
             default:
               errorMessage = 'Неизвестная ошибка геолокации'
           }
+          showNotification(errorMessage, 'warning')
           reject(new Error(errorMessage))
         },
         options,
@@ -53,11 +51,14 @@ export function useGeolocation() {
     let currentCoords = defaultCoords
 
     try {
-      currentCoords = await getUserCoords()
+      currentCoords = await getUserCoords({
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      })
     } catch (e) {
-      console.error('❌ Ошибка получения координат:', e.message)
+      showNotification(`Ошибка: ${e.message}. Будет использован центр Симферополя.`, 'warning')
       console.log('🔄 Используются координаты по умолчанию (Симферополь):', currentCoords)
-      alert(`Ошибка: ${e.message}. Будет использован центр Симферополя.`)
     }
 
     const url = getYandexRouteLink(currentCoords, trip.points)
